@@ -36,6 +36,9 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.11.0'
 }
 
 processResources {
