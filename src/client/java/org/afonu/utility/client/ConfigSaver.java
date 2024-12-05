@@ -3,7 +3,7 @@ package org.afonu.utility.client;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import org.afonu.utility.client.option.Option;
-import org.apache.commons.lang3.NotImplementedException;
+import org.afonu.utility.client.option.OptionInit;
 
 import java.io.File;
 import java.io.FileReader;
@@ -11,7 +11,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class ConfigSaver {
-    //File
     private static final String PATH = "config/afonu.utility/";
     private static final String FILE_NAME = "config.json";
 
@@ -44,12 +43,8 @@ public class ConfigSaver {
     }
 
     public static void SaveConfig(Option _option) {
-        // Logique pour enregistrer la configuration
-        System.out.println("Paramètres enregistrés : ");
-        System.out.println("Field1 Value: " + _option.checkedAllowAttackEntity);
-        System.out.println("Checkbox Value: " + _option.checkedAllowAttackBlock);
-
         SaveConfigToFile(_option);
+        OptionInit.Init(_option);
     }
 
     private static void SaveConfigToFile(Option _option) {

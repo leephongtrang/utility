@@ -8,7 +8,7 @@ import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 
 public class Action {
-    private static KeyBinding OPEN_CONFIG_KEY = KeyBindingHelper.registerKeyBinding(new KeyBinding("key.fabric-key-binding-api-v1-testmod.test_keybinding_1", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_Z, "key.category.first.test"));
+    private static KeyBinding OPEN_CONFIG_KEY = KeyBindingHelper.registerKeyBinding(new KeyBinding("Open Menu", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_Z, "Utility"));
 
     public static void init() {
         // Enregistrer le raccourci clavier
