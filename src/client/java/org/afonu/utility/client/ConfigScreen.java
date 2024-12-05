@@ -21,6 +21,9 @@ public class ConfigScreen extends Screen {
     int RED = 0xff1100;
     int GREEN = 0x00ab00;
 
+    //Space
+    int SPACE_BETWEEN_Y = 5;
+
     public ConfigScreen() {
         super(Text.of("Config screen?"));
     }
@@ -29,6 +32,7 @@ public class ConfigScreen extends Screen {
     //Button
     public ButtonWidget saveButton;
     public ButtonWidget buttonAttackBlock;
+    public ButtonWidget buttonAttackEntity;
     public ButtonWidget button2;
 
     //Checker
@@ -62,6 +66,7 @@ public class ConfigScreen extends Screen {
 //        addDrawableChild(checkerAllowAttackBlock);
 //        addDrawableChild(checkerAllowAttackEntity);
         addDrawableChild(buttonAttackBlock);
+        addDrawableChild(buttonAttackEntity);
         addDrawableChild(button2);
     }
 
@@ -86,6 +91,15 @@ public class ConfigScreen extends Screen {
                 })
                 .dimensions(width / 2 - 105, 20, 100, 20)
                 .tooltip(Tooltip.of(Text.literal("§aTrue§f: Allow breaking block with player's tool.\n§cFalse§f: Prevent player from breaking block with its tool.")))
+                .build();
+
+        buttonAttackEntity = ButtonWidget.builder(Text.literal("Attack Entity: " + (option.allowAttackEntity ? "§aTrue§a"  : "§cFalse§c")), button -> {
+                    System.out.println("You clicked buttonAttackEntity!");
+                    option.allowAttackEntity = !option.allowAttackEntity;
+                    UpdateText(buttonAttackEntity, "Attack Entity: ", String.valueOf(option.allowAttackEntity));
+                })
+                .dimensions(width / 2 - 105, 45, 100, 20)
+                .tooltip(Tooltip.of(Text.literal("§aTrue§f: Allow attacking on entity with player's tool.\n§cFalse§f: Prevent player from attacking entity with its tool.")))
                 .build();
     }
 }

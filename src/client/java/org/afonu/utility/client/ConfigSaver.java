@@ -44,7 +44,7 @@ public class ConfigSaver {
 
     public static void SaveConfig(Option _option) {
         SaveConfigToFile(_option);
-        OptionInit.Init(_option);
+        OptionInit.Init();
     }
 
     private static void SaveConfigToFile(Option _option) {

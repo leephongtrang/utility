@@ -1,7 +1,17 @@
 package org.afonu.utility.client.option;
 
+import org.afonu.utility.client.ConfigSaver;
+
 public class OptionInit {
-    public static void Init(Option option) {
-        Option_AttackBlock.AttackBlock(option.allowAttackBlock);
+    public static Option Option;
+
+    public static void Init() {
+        Option = ConfigSaver.ReadConfig();
+        Load();
+    }
+
+    public static void Load() {
+        Option_AttackBlock.AttackBlock(Option.allowAttackBlock);
+        Option_AttackEntity.AttackEntity(Option.allowAttackEntity);
     }
 }

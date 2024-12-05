@@ -7,10 +7,10 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 
-public class Action {
+public class Keybind {
     private static KeyBinding OPEN_CONFIG_KEY = KeyBindingHelper.registerKeyBinding(new KeyBinding("Open Menu", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_Z, "Utility"));
 
-    public static void init() {
+    public static void Init() {
         // Enregistrer le raccourci clavier
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (OPEN_CONFIG_KEY.isPressed()) {
