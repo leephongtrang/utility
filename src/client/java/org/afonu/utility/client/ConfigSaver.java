@@ -1,6 +1,7 @@
 package org.afonu.utility.client;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import org.afonu.utility.client.option.Option;
 import org.afonu.utility.client.option.OptionInit;
@@ -49,11 +50,9 @@ public class ConfigSaver {
 
     private static void SaveConfigToFile(Option _option) {
         try (FileWriter writer = new FileWriter(PATH + FILE_NAME)) {
-            Gson jsonSerializer = new Gson();
+            Gson jsonSerializer = new GsonBuilder().setPrettyPrinting().create();
 
-            String configJson = jsonSerializer.toJson(_option);
-
-            writer.write(configJson);
+            jsonSerializer.toJson(_option, writer);
         }  catch (IOException e) {
             e.printStackTrace();
         }
