@@ -19,6 +19,6 @@ public class OptionInit {
 
         //ArmorHUD
         HudRenderCallback.EVENT.register(new ArmorHUDWidget());
-        if (Option.toggleItemHUD) { HudRenderCallback.EVENT.register(new ItemHUDWidget()); }
+        HudRenderCallback.EVENT.register(new ItemHUDWidget());
     }
 }

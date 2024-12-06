@@ -16,15 +16,18 @@ import java.awt.*;
 public class ItemHUDWidget implements HudRenderCallback {
     @Override
     public void onHudRender(DrawContext drawContext, RenderTickCounter renderTickCounter) {
-        MinecraftClient client = MinecraftClient.getInstance();
-        ClientPlayerEntity player = MinecraftClient.getInstance().player;
-        TextRenderer renderer = client.textRenderer;
+        if (OptionInit.Option.toggleItemHUD) {
+            MinecraftClient client = MinecraftClient.getInstance();
+            ClientPlayerEntity player = MinecraftClient.getInstance().player;
+            TextRenderer renderer = client.textRenderer;
 
-        ItemStack item = player.getMainHandStack();
+            assert player != null;
+            ItemStack item = player.getMainHandStack();
 
-        if (item.getMaxDamage() != 0) {
-            drawContext.drawItem(item, OptionInit.Option.itemHUD_positionX, OptionInit.Option.armorHUD_positionY);
-            //drawContext.drawText(renderer, String.valueOf(item.getMaxDamage() - item.getDamage()), OptionInit.Option.itemHUD_positionX-74, OptionInit.Option.itemHUD_positionY-(OptionInit.Option.itemHUD_positionY/2)-(-35)-6, Color.WHITE.getRGB(), true);
+            if (item.getMaxDamage() != 0) {
+                drawContext.drawText(renderer, String.valueOf(item.getMaxDamage() - item.getDamage()), OptionInit.Option.itemHUD_positionX, OptionInit.Option.itemHUD_positionY + 16, item.getItemBarColor(), true);
+                drawContext.drawItem(item, OptionInit.Option.itemHUD_positionX, OptionInit.Option.itemHUD_positionY);
+            }
         }
     }
 }
