@@ -34,6 +34,7 @@ public class ConfigScreen extends Screen {
     public ButtonWidget saveButton;
     public ButtonWidget buttonAttackBlock;
     public ButtonWidget buttonAttackEntity;
+    public ButtonWidget buttonItemHUD;
     public ButtonWidget button2;
     public ButtonWidget buttonPauseGameOnMenu;
 
@@ -68,13 +69,13 @@ public class ConfigScreen extends Screen {
                 .build();
 
         addDrawableChild(buttonPauseGameOnMenu);
-        addDrawableChild(elementListWidget);
         addDrawableChild(saveButton);
 //        addDrawableChild(checkerAllowAttackBlock);
 //        addDrawableChild(checkerAllowAttackEntity);
         addDrawableChild(buttonAttackBlock);
         addDrawableChild(buttonAttackEntity);
         addDrawableChild(button2);
+        addDrawableChild(elementListWidget);
     }
 
     @Override
@@ -120,6 +121,15 @@ public class ConfigScreen extends Screen {
                 })
                 .dimensions(width / 2 + 5, 40, 200, 20)
                 .tooltip(Tooltip.of(Text.literal("Tooltip of button2")))
+                .build();
+
+        buttonItemHUD = ButtonWidget.builder(Text.literal("Item HUD: " + (option.toggleItemHUD ? GREEN + "True" : RED + "False")), button -> {
+                    System.out.println("You clicked buttonAttackBlock!");
+                    option.toggleItemHUD = !option.toggleItemHUD;
+                    UpdateText(buttonItemHUD, "Item HUD: ", String.valueOf(option.toggleItemHUD));
+                })
+                .dimensions(width / 2 - 105, 60 + (2*SPACE_BETWEEN_Y), 100, 20)
+                .tooltip(Tooltip.of(Text.literal(GREEN + "True" + WHITE + ": Allow breaking block with player's tool.\n" + RED + "False" + WHITE + ": Prevent player from breaking block with its tool.")))
                 .build();
     }
 

@@ -2,7 +2,6 @@ package org.afonu.utility.client.option;
 
 import net.minecraft.item.Item;
 
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,11 +18,11 @@ public class Option {
     public Map<Item, Integer> ItemMinDurability = new HashMap<Item, Integer>();
 
     //ArmorHUD
-    public boolean armorHUD = false;
+    public boolean toggleArmorHUD = false;
     public int armorHUD_positionX = 0;
     public int armorHUD_positionY = 0;
 
-    public boolean itemHUD = false;
+    public boolean toggleItemHUD = false;
     public int itemHUD_positionX = 0;
     public int itemHUD_positionY = 0;
 
