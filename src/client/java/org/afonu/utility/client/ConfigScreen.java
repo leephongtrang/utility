@@ -35,6 +35,7 @@ public class ConfigScreen extends Screen {
     public ButtonWidget buttonAttackBlock;
     public ButtonWidget buttonAttackEntity;
     public ButtonWidget buttonItemHUD;
+    public ButtonWidget buttonArmorHUD;
     public ButtonWidget button2;
     public ButtonWidget buttonPauseGameOnMenu;
 
@@ -69,6 +70,7 @@ public class ConfigScreen extends Screen {
                 .build();
 
         addDrawableChild(buttonItemHUD);
+        addDrawableChild(buttonArmorHUD);
         addDrawableChild(buttonPauseGameOnMenu);
         addDrawableChild(saveButton);
 //        addDrawableChild(checkerAllowAttackBlock);
@@ -123,6 +125,15 @@ public class ConfigScreen extends Screen {
                 })
                 .dimensions(width / 2 - 105, (60 + (2*SPACE_BETWEEN_Y)), 100, 20)
                 .tooltip(Tooltip.of(Text.literal(GREEN + "True" + WHITE + ": Allow breaking block with player's tool.\n" + RED + "False" + WHITE + ": Prevent player from breaking block with its tool.")))
+                .build();
+
+        buttonArmorHUD = ButtonWidget.builder(Text.literal("Armor HUD: " + (option.toggleArmorHUD ? GREEN + "True" : RED + "False")), button -> {
+                    System.out.println("You clicked buttonArmorHUD!");
+                    option.toggleArmorHUD = !option.toggleArmorHUD;
+                    UpdateText(buttonArmorHUD, "Armor HUD: ", String.valueOf(option.toggleArmorHUD));
+                })
+                .dimensions(width / 2 - 105, (80 + (3*SPACE_BETWEEN_Y)), 100, 20)
+                .tooltip(Tooltip.of(Text.literal(GREEN + "True" + WHITE + ": Show armor HUD. \n" + RED + "False" + WHITE + ": Hide armor HUD.")))
                 .build();
 
         buttonPauseGameOnMenu = ButtonWidget.builder(Text.literal("pauseMenu"), button -> {
