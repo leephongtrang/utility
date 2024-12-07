@@ -12,7 +12,7 @@ public class Option_AttackBlock {
             if (!OptionInit.Option.allowAttackBlock) {
                 if (player.getMainHandStack().isDamaged()) {
                     if (player.getMainHandStack().getDamage() >= player.getMainHandStack().getMaxDamage() - 10) {
-                        world.playSound(player, player.getBlockPos(), SoundEvents.BLOCK_AMETHYST_BLOCK_HIT, SoundCategory.BLOCKS, 1f, 1f);
+                        world.playSound(player, player.getBlockPos(), SoundEvents.ENTITY_PARROT_IMITATE_WITHER_SKELETON, SoundCategory.BLOCKS, 1f, 1f);
                         return ActionResult.FAIL;
                     }
                 }

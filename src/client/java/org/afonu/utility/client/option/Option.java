@@ -21,6 +21,8 @@ public class Option {
     public int textPadding = 16;
 
     public boolean toggleArmorHUD = false;
+    public boolean toggleOnlyDamageItem = false;
+    public boolean toggleOnlyItem = false;
     public int armorHUD_positionX = 0;
     public int armorHUD_positionY = 60;
 
