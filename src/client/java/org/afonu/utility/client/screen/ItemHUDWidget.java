@@ -21,13 +21,16 @@ public class ItemHUDWidget implements HudRenderCallback {
             ClientPlayerEntity player = MinecraftClient.getInstance().player;
             TextRenderer renderer = client.textRenderer;
 
+            int width = client.getWindow().getWidth() * (OptionInit.Option.itemHUD_positionX/1000);
+            int height = client.getWindow().getHeight() * (OptionInit.Option.itemHUD_positionY/1000);
+
             assert player != null;
             ItemStack item = player.getMainHandStack();
 
             if (item.getMaxDamage() != 0) {
-                drawContext.fill(OptionInit.Option.itemHUD_positionX, 0, OptionInit.Option.itemHUD_positionX + 40, 16, 0xFF0000FF);
-                drawContext.drawText(renderer, String.valueOf(item.getMaxDamage() - item.getDamage()), OptionInit.Option.itemHUD_positionX + 16, OptionInit.Option.itemHUD_positionY + 4, item.getItemBarColor(), true);
-                drawContext.drawItem(item, OptionInit.Option.itemHUD_positionX, OptionInit.Option.itemHUD_positionY);
+                //drawContext.fill(OptionInit.Option.itemHUD_positionX, 0, OptionInit.Option.itemHUD_positionX + 40, 16, 0xFF0000FF);
+                drawContext.drawText(renderer, String.valueOf(item.getMaxDamage() - item.getDamage()), width + OptionInit.Option.textPadding, height + 4, item.getItemBarColor(), true);
+                drawContext.drawItem(item, width, height);
             }
         }
     }

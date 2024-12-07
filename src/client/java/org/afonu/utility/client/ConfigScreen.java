@@ -73,6 +73,7 @@ public class ConfigScreen extends Screen {
                 .build();
 
         addDrawableChild(sliderItemHUDPositionX);
+        addDrawableChild(sliderItemHUDPositionY);
         addDrawableChild(buttonItemHUD);
         addDrawableChild(buttonArmorHUD);
         addDrawableChild(buttonPauseGameOnMenu);
@@ -155,7 +156,8 @@ public class ConfigScreen extends Screen {
 
     private void SetSlider() {
         double dItemX = (double) option.itemHUD_positionX /10;
-        sliderItemHUDPositionX = new SliderWidget(100, height/4*3, 100, 20, Text.literal("X: " + dItemX + "%"), (double) option.itemHUD_positionX /1000) {
+        double dItemY = (double) option.itemHUD_positionY /10;
+        sliderItemHUDPositionX = new SliderWidget(100, 120, 100, 20, Text.literal("X: " + dItemX + "%"), (double) option.itemHUD_positionX /1000) {
             @Override
             protected void updateMessage() {
                 double d = (double) option.itemHUD_positionX /10;
@@ -168,6 +170,20 @@ public class ConfigScreen extends Screen {
             }
         };
         sliderItemHUDPositionX.setTooltip(Tooltip.of(Text.literal("Tooltip")));
+
+        sliderItemHUDPositionY = new SliderWidget(100, 100, 100, 20, Text.literal("Y: " + dItemY + "%"), (double) option.itemHUD_positionY /1000) {
+            @Override
+            protected void updateMessage() {
+                double d = (double) option.itemHUD_positionY /10;
+                this.setMessage(Text.literal("X: " + d + "%"));
+            }
+
+            @Override
+            protected void applyValue() {
+                option.itemHUD_positionY = (int) (this.value * 1000);
+            }
+        };
+        sliderItemHUDPositionY.setTooltip(Tooltip.of(Text.literal("Tooltip")));
 
 
     }

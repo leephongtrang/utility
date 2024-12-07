@@ -18,6 +18,8 @@ public class Option {
     public Map<Item, Integer> ItemMinDurability = new HashMap<Item, Integer>();
 
     //ArmorHUD
+    public int textPadding = 16;
+
     public boolean toggleArmorHUD = false;
     public int armorHUD_positionX = 0;
     public int armorHUD_positionY = 60;
