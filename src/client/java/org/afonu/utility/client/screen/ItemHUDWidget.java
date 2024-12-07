@@ -21,10 +21,10 @@ public class ItemHUDWidget implements HudRenderCallback {
             ClientPlayerEntity player = MinecraftClient.getInstance().player;
             TextRenderer renderer = client.textRenderer;
 
-            boolean zeroX = OptionInit.Option.itemHUD_positionX == 0;
-            boolean zeroY = OptionInit.Option.itemHUD_positionY == 0;
+            boolean zeroX = OptionInit.Option.toggleOnlyItem ? OptionInit.Option.itemHUD_positionX < 16 : OptionInit.Option.itemHUD_positionX < 27;
+            boolean zeroY = OptionInit.Option.itemHUD_positionY <= 27;
 
-            int width = zeroX ? 0 : (int) (((double) OptionInit.Option.itemHUD_positionX / 2000) * (client.getWindow().getWidth())) - (OptionInit.Option.textPadding + 24);
+            int width = zeroX ? (OptionInit.Option.toggleOnlyItem ? 0 : -16) : (int) (((double) OptionInit.Option.itemHUD_positionX / 2000) * (client.getWindow().getWidth())) - (OptionInit.Option.textPadding + 24);
             int height = zeroY ? 0 : (int) ((double) OptionInit.Option.itemHUD_positionY / 2000 * (client.getWindow().getHeight())) - 16;
 
             assert player != null;
@@ -32,10 +32,10 @@ public class ItemHUDWidget implements HudRenderCallback {
 
             if (item.getMaxDamage() != 0) {
                 //drawContext.fill(OptionInit.Option.itemHUD_positionX, 0, OptionInit.Option.itemHUD_positionX + 40, 16, 0xFF0000FF);
-                if (OptionInit.Option.toggleOnlyDamageItem) {
+                if (OptionInit.Option.toggleOnlyItem) {
                     drawContext.drawItem(item, width, height);
                 }
-                if (OptionInit.Option.toggleOnlyItem) {
+                if (OptionInit.Option.toggleOnlyDamageItem) {
                     drawContext.drawText(renderer, String.valueOf(item.getMaxDamage() - item.getDamage()), width + OptionInit.Option.textPadding, height + 4, item.getItemBarColor(), true);
                 }
             }

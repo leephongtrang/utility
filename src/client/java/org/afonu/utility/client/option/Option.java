@@ -21,13 +21,15 @@ public class Option {
     public int textPadding = 16;
 
     public boolean toggleArmorHUD = false;
-    public boolean toggleOnlyDamageItem = false;
-    public boolean toggleOnlyItem = false;
-    public int armorHUD_positionX = 0;
-    public int armorHUD_positionY = 60;
+    public boolean toggleOnlyArmorDamage = false;
+    public boolean toggleOnlyArmor = false;
+    public int armorHUD_positionX = 500;
+    public int armorHUD_positionY = 530;
 
     public boolean toggleItemHUD = false;
-    public int itemHUD_positionX = 0;
-    public int itemHUD_positionY = 0;
+    public boolean toggleOnlyDamageItem = false;
+    public boolean toggleOnlyItem = false;
+    public int itemHUD_positionX = 530;
+    public int itemHUD_positionY = 530;
 
 }
