@@ -39,7 +39,8 @@ public class ConfigScreen extends Screen {
     public ButtonWidget buttonPauseGameOnMenu;
     public ButtonWidget buttonItemHUDItem;
     public ButtonWidget buttonItemHUDDamage;
-
+    public ButtonWidget buttonArmorHUDItem;
+    public ButtonWidget buttonArmorHUDDamage;
 
     //List
     public MenuListWidget elementListWidget;
@@ -48,6 +49,8 @@ public class ConfigScreen extends Screen {
 
     public SliderWidget sliderItemHUDPositionX;
     public SliderWidget sliderItemHUDPositionY;
+    public SliderWidget sliderArmorHUDPositionX;
+    public SliderWidget sliderArmorHUDPositionY;
 
 
     //Checker
@@ -60,8 +63,8 @@ public class ConfigScreen extends Screen {
         SetButtons();
         SetList();
         SetSlider();
-        SetRigthRow();
-
+        SetLeftRow();
+        SetRightRow();
 //        checkerAllowAttackBlock = CheckboxWidget.builder(Text.literal("Allow Attack Block"), new TextRenderer(new Function<Identifier, FontStorage>() {
 //        }, false)
 //                .dimensions(width/2, height - 20, 200, 20)
@@ -78,6 +81,8 @@ public class ConfigScreen extends Screen {
 
         addDrawableChild(sliderItemHUDPositionX);
         addDrawableChild(sliderItemHUDPositionY);
+        addDrawableChild(sliderArmorHUDPositionX);
+        addDrawableChild(sliderArmorHUDPositionY);
         addDrawableChild(buttonItemHUD);
         addDrawableChild(buttonArmorHUD);
         addDrawableChild(buttonPauseGameOnMenu);
@@ -89,6 +94,8 @@ public class ConfigScreen extends Screen {
         addDrawableChild(button2);
         addDrawableChild(buttonItemHUDItem);
         addDrawableChild(buttonItemHUDDamage);
+        addDrawableChild(buttonArmorHUDItem);
+        addDrawableChild(buttonArmorHUDDamage);
 
         addDrawableChild(elementListWidget);
     }
@@ -103,12 +110,12 @@ public class ConfigScreen extends Screen {
         buttonWidget.setMessage(Text.literal(optionName + textValue));
     }
 
-    private void SetRigthRow() {
+    private void SetLeftRow() {
         buttonItemHUD = ButtonWidget.builder(Text.literal("Item HUD: " + (option.toggleItemHUD ? GREEN + "True" : RED + "False")), button -> {
                     option.toggleItemHUD = !option.toggleItemHUD;
                     UpdateText(buttonItemHUD, "Item HUD: ", String.valueOf(option.toggleItemHUD));
                 })
-                .dimensions(width / 2 - 105, (100 + (0*SPACE_BETWEEN_Y)), 100, 20)
+                .dimensions(width / 2 - 210, (80 + (0*SPACE_BETWEEN_Y)), 205, 20)
                 .tooltip(Tooltip.of(Text.literal(GREEN + "True" + WHITE + ": Show your main hand's item.\n" + RED + "False" + WHITE + ": Hide your main hand's item.")))
                 .build();
 
@@ -116,16 +123,42 @@ public class ConfigScreen extends Screen {
                     option.toggleOnlyItem = !option.toggleOnlyItem;
                     UpdateText(buttonItemHUDItem, "Show Item: ", String.valueOf(option.toggleOnlyItem));
                 })
-                .dimensions(width / 2 - 105, (120 + (1*SPACE_BETWEEN_Y)), 100, 20)
-                .tooltip(Tooltip.of(Text.literal(GREEN + "True" + WHITE + ": Show item's icon\n" + RED + "False" + WHITE + ": Hide item's icon")))
+                .dimensions(width / 2 - 105, (100 + (1*SPACE_BETWEEN_Y)), 100, 20)
+                .tooltip(Tooltip.of(Text.literal(GREEN + "True" + WHITE + ": Show item's icon.\n" + RED + "False" + WHITE + ": Hide item's icon.")))
                 .build();
 
-        buttonItemHUDDamage = ButtonWidget.builder(Text.literal("Show Item Damage: " + (option.toggleOnlyDamageItem ? GREEN + "True" : RED + "False")), button -> {
+        buttonItemHUDDamage = ButtonWidget.builder(Text.literal("Show Item Durability: " + (option.toggleOnlyDamageItem ? GREEN + "True" : RED + "False")), button -> {
                     option.toggleOnlyDamageItem = !option.toggleOnlyDamageItem;
-                    UpdateText(buttonItemHUDDamage, "Show Item Damage: ", String.valueOf(option.toggleOnlyDamageItem));
+                    UpdateText(buttonItemHUDDamage, "Show Item Durability: ", String.valueOf(option.toggleOnlyDamageItem));
                 })
-                .dimensions(width / 2 - 105, (140 + (2*SPACE_BETWEEN_Y)), 100, 20)
+                .dimensions(width / 2 - 105, (120 + (2*SPACE_BETWEEN_Y)), 100, 20)
                 .tooltip(Tooltip.of(Text.literal(GREEN + "True" + WHITE + ": Show item remaining durability.\n" + RED + "False" + WHITE + ": Hide item remaining durability.")))
+                .build();
+    }
+
+    private void SetRightRow() {
+        buttonArmorHUD = ButtonWidget.builder(Text.literal("Armor HUD: " + (option.toggleArmorHUD ? GREEN + "True" : RED + "False")), button -> {
+                    option.toggleArmorHUD = !option.toggleArmorHUD;
+                    UpdateText(buttonArmorHUD, "Armor HUD: ", String.valueOf(option.toggleArmorHUD));
+                })
+                .dimensions(width / 2 + 5, (80 + (0*SPACE_BETWEEN_Y)), 205, 20)
+                .tooltip(Tooltip.of(Text.literal(GREEN + "True" + WHITE + ": Show armor HUD.\n" + RED + "False" + WHITE + ": Hide armor HUD.")))
+                .build();
+
+        buttonArmorHUDItem = ButtonWidget.builder(Text.literal("Show Armor: " + (option.toggleOnlyArmor ? GREEN + "True" : RED + "False")), button -> {
+                    option.toggleOnlyArmor = !option.toggleOnlyArmor;
+                    UpdateText(buttonArmorHUDItem, "Show Armor: ", String.valueOf(option.toggleOnlyArmor));
+                })
+                .dimensions(width / 2 + 5, (100 + (1*SPACE_BETWEEN_Y)), 100, 20)
+                .tooltip(Tooltip.of(Text.literal(GREEN + "True" + WHITE + ": Show armor's icon.\n" + RED + "False" + WHITE + ": Hide armor's icon.")))
+                .build();
+
+        buttonArmorHUDDamage = ButtonWidget.builder(Text.literal("Show Armor Durability: " + (option.toggleOnlyArmorDamage ? GREEN + "True" : RED + "False")), button -> {
+                    option.toggleOnlyArmorDamage = !option.toggleOnlyArmorDamage;
+                    UpdateText(buttonArmorHUDDamage, "Show Armor Durability: ", String.valueOf(option.toggleOnlyArmorDamage));
+                })
+                .dimensions(width / 2 + 5, (120 + (2*SPACE_BETWEEN_Y)), 100, 20)
+                .tooltip(Tooltip.of(Text.literal(GREEN + "True" + WHITE + ": Show armor's remaining durability.\n" + RED + "False" + WHITE + ": Hide armor's remaining durability.")))
                 .build();
     }
 
@@ -143,7 +176,7 @@ public class ConfigScreen extends Screen {
                     option.allowAttackBlock = !option.allowAttackBlock;
                     UpdateText(buttonAttackBlock, "Attack Block: ", String.valueOf(option.allowAttackBlock));
                 })
-                .dimensions(width / 2 - 105, 20, 100, 20)
+                .dimensions(width / 2 - 100, 20, 100, 20)
                 .tooltip(Tooltip.of(Text.literal(GREEN + "True" + WHITE + ": Allow breaking block with player's tool.\n" + RED + "False" + WHITE + ": Prevent player from breaking block with its tool.")))
                 .build();
 
@@ -152,19 +185,8 @@ public class ConfigScreen extends Screen {
                     option.allowAttackEntity = !option.allowAttackEntity;
                     UpdateText(buttonAttackEntity, "Attack Entity: ", String.valueOf(option.allowAttackEntity));
                 })
-                .dimensions(width / 2 - 105, 45, 100, 20)
+                .dimensions(width / 2 - 100, 45, 100, 20)
                 .tooltip(Tooltip.of(Text.literal(GREEN + "True" + WHITE + ": Allow attacking on entity with player's tool.\n"+ RED + "False" + WHITE + ": Prevent player from attacking entity with its tool.")))
-                .build();
-
-
-
-        buttonArmorHUD = ButtonWidget.builder(Text.literal("Armor HUD: " + (option.toggleArmorHUD ? GREEN + "True" : RED + "False")), button -> {
-                    System.out.println("You clicked buttonArmorHUD!");
-                    option.toggleArmorHUD = !option.toggleArmorHUD;
-                    UpdateText(buttonArmorHUD, "Armor HUD: ", String.valueOf(option.toggleArmorHUD));
-                })
-                .dimensions(width / 2 - 105, (80 + (3*SPACE_BETWEEN_Y)), 100, 20)
-                .tooltip(Tooltip.of(Text.literal(GREEN + "True" + WHITE + ": Show armor HUD. \n" + RED + "False" + WHITE + ": Hide armor HUD.")))
                 .build();
 
         buttonPauseGameOnMenu = ButtonWidget.builder(Text.literal("pauseMenu"), button -> {
@@ -181,13 +203,14 @@ public class ConfigScreen extends Screen {
     }
 
     private void SetSlider() {
+        // Item Positions Sliders
         double dItemX = (double) option.itemHUD_positionX /10;
         double dItemY = (double) option.itemHUD_positionY /10;
-        sliderItemHUDPositionX = new SliderWidget(100, 100, 100, 20, Text.literal("X: " + dItemX + "%"), (double) option.itemHUD_positionX /1000) {
+        sliderItemHUDPositionX = new SliderWidget(width / 2 - 210, (100 + (1*SPACE_BETWEEN_Y)), 100, 20, Text.literal("Item X: " + dItemX + "%"), (double) option.itemHUD_positionX /1000) {
             @Override
             protected void updateMessage() {
                 double d = (double) option.itemHUD_positionX /10;
-                this.setMessage(Text.literal("X: " + d + "%"));
+                this.setMessage(Text.literal("Item X: " + d + "%"));
             }
 
             @Override
@@ -195,13 +218,13 @@ public class ConfigScreen extends Screen {
                 option.itemHUD_positionX = (int) (this.value * 1000);
             }
         };
-        sliderItemHUDPositionX.setTooltip(Tooltip.of(Text.literal("Tooltip")));
+        sliderItemHUDPositionX.setTooltip(Tooltip.of(Text.literal("X Position of Item")));
 
-        sliderItemHUDPositionY = new SliderWidget(100, 120, 100, 20, Text.literal("Y: " + dItemY + "%"), (double) option.itemHUD_positionY /1000) {
+        sliderItemHUDPositionY = new SliderWidget(width / 2 - 210, (120 + (2*SPACE_BETWEEN_Y)), 100, 20, Text.literal("Item Y: " + dItemY + "%"), (double) option.itemHUD_positionY /1000) {
             @Override
             protected void updateMessage() {
                 double d = (double) option.itemHUD_positionY /10;
-                this.setMessage(Text.literal("Y: " + d + "%"));
+                this.setMessage(Text.literal("Item Y: " + d + "%"));
             }
 
             @Override
@@ -209,8 +232,38 @@ public class ConfigScreen extends Screen {
                 option.itemHUD_positionY = (int) (this.value * 1000);
             }
         };
-        sliderItemHUDPositionY.setTooltip(Tooltip.of(Text.literal("Tooltip")));
+        sliderItemHUDPositionY.setTooltip(Tooltip.of(Text.literal("Y Position of Item")));
 
+        // Armor Positions Sliders
+        double dArmorX = (double) option.armorHUD_positionX /10;
+        double dArmorY = (double) option.armorHUD_positionY /10;
+        sliderArmorHUDPositionX = new SliderWidget(width / 2 + 110, (100 + (1*SPACE_BETWEEN_Y)), 100, 20, Text.literal("Armor X: " + dArmorX + "%"), (double) option.armorHUD_positionX /1000) {
+            @Override
+            protected void updateMessage() {
+                double d = (double) option.armorHUD_positionX /10;
+                this.setMessage(Text.literal("Armor X: " + d + "%"));
+            }
+
+            @Override
+            protected void applyValue() {
+                option.armorHUD_positionX = (int) (this.value * 1000);
+            }
+        };
+        sliderArmorHUDPositionX.setTooltip(Tooltip.of(Text.literal("X Position of Armor")));
+
+        sliderArmorHUDPositionY = new SliderWidget(width / 2 + 110, (120 + (2*SPACE_BETWEEN_Y)), 100, 20, Text.literal("Armor Y: " + dArmorY + "%"), (double) option.armorHUD_positionY /1000) {
+            @Override
+            protected void updateMessage() {
+                double d = (double) option.armorHUD_positionY /10;
+                this.setMessage(Text.literal("Armor Y: " + d + "%"));
+            }
+
+            @Override
+            protected void applyValue() {
+                option.armorHUD_positionY = (int) (this.value * 1000);
+            }
+        };
+        sliderArmorHUDPositionY.setTooltip(Tooltip.of(Text.literal("Y Position of Armor")));
 
     }
 }
