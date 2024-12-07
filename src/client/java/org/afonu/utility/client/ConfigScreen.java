@@ -2,12 +2,11 @@ package org.afonu.utility.client;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.tooltip.Tooltip;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.CheckboxWidget;
-import net.minecraft.client.gui.widget.ElementListWidget;
-import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.gui.widget.*;
+import net.minecraft.client.option.SimpleOption;
 import net.minecraft.text.Text;
 import org.afonu.utility.client.option.Option;
+import org.afonu.utility.client.option.OptionInit;
 import org.afonu.utility.client.option.Option_PauseGameOnMenu;
 import org.afonu.utility.client.screen.MenuListWidget;
 
@@ -44,6 +43,10 @@ public class ConfigScreen extends Screen {
     //public List
 
 
+    public SliderWidget sliderItemHUDPositionX;
+    public SliderWidget sliderItemHUDPositionY;
+
+
     //Checker
     public CheckboxWidget checkerAllowAttackEntity;
     public CheckboxWidget checkerAllowAttackBlock;
@@ -53,7 +56,7 @@ public class ConfigScreen extends Screen {
         option = ConfigSaver.ReadConfig();
         SetButtons();
         SetList();
-
+        SetSlider();
 
 //        checkerAllowAttackBlock = CheckboxWidget.builder(Text.literal("Allow Attack Block"), new TextRenderer(new Function<Identifier, FontStorage>() {
 //        }, false)
@@ -69,6 +72,7 @@ public class ConfigScreen extends Screen {
                 .tooltip(Tooltip.of(Text.literal("Tooltip of button2")))
                 .build();
 
+        addDrawableChild(sliderItemHUDPositionX);
         addDrawableChild(buttonItemHUD);
         addDrawableChild(buttonArmorHUD);
         addDrawableChild(buttonPauseGameOnMenu);
@@ -147,5 +151,24 @@ public class ConfigScreen extends Screen {
 
     private void SetList() {
         elementListWidget = new MenuListWidget(this.client, width - 50, 100, 40, height/3 -20, 20);
+    }
+
+    private void SetSlider() {
+        double dItemX = (double) option.itemHUD_positionX /10;
+        sliderItemHUDPositionX = new SliderWidget(100, height/4*3, 100, 20, Text.literal("X: " + dItemX + "%"), (double) option.itemHUD_positionX /1000) {
+            @Override
+            protected void updateMessage() {
+                double d = (double) option.itemHUD_positionX /10;
+                this.setMessage(Text.literal("X: " + d + "%"));
+            }
+
+            @Override
+            protected void applyValue() {
+                option.itemHUD_positionX = (int) (this.value * 1000);
+            }
+        };
+        sliderItemHUDPositionX.setTooltip(Tooltip.of(Text.literal("Tooltip")));
+
+
     }
 }

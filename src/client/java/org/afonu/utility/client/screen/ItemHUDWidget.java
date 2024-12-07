@@ -25,7 +25,8 @@ public class ItemHUDWidget implements HudRenderCallback {
             ItemStack item = player.getMainHandStack();
 
             if (item.getMaxDamage() != 0) {
-                drawContext.drawText(renderer, String.valueOf(item.getMaxDamage() - item.getDamage()), OptionInit.Option.itemHUD_positionX, OptionInit.Option.itemHUD_positionY + 16, item.getItemBarColor(), true);
+                drawContext.fill(OptionInit.Option.itemHUD_positionX, 0, OptionInit.Option.itemHUD_positionX + 40, 16, 0xFF0000FF);
+                drawContext.drawText(renderer, String.valueOf(item.getMaxDamage() - item.getDamage()), OptionInit.Option.itemHUD_positionX + 16, OptionInit.Option.itemHUD_positionY + 4, item.getItemBarColor(), true);
                 drawContext.drawItem(item, OptionInit.Option.itemHUD_positionX, OptionInit.Option.itemHUD_positionY);
             }
         }
