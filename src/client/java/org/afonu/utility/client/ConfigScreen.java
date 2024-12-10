@@ -100,6 +100,8 @@ public class ConfigScreen extends Screen {
         addDrawableChild(elementListWidget);
     }
 
+    //TODO Fix the Buttons: PauseGame, AttackBlock, AttackEntity, Button 2
+
     @Override
     public boolean shouldPause() {
         return !Option_PauseGameOnMenu.PauseGameOnMenu();

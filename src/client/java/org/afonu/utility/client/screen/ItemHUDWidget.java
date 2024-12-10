@@ -13,6 +13,8 @@ import org.afonu.utility.client.option.OptionInit;
 
 import java.awt.*;
 
+//TODO Add OffHand Damage Indicator
+
 public class ItemHUDWidget implements HudRenderCallback {
     @Override
     public void onHudRender(DrawContext drawContext, RenderTickCounter renderTickCounter) {
