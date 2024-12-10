@@ -32,4 +32,9 @@ public class Option {
     public int itemHUD_positionX = 530;
     public int itemHUD_positionY = 530;
 
+    public boolean toggleOffHandHUD = false;
+    public boolean toggleOnlyDamageOffHand = false;
+    public boolean toggleOnlyOffHand = false;
+    public int offHandHUD_positionX = 560;
+    public int offHandHUD_positionY = 530;
 }

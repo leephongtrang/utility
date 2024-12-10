@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import org.afonu.utility.client.ConfigSaver;
 import org.afonu.utility.client.screen.ArmorHUDWidget;
 import org.afonu.utility.client.screen.ItemHUDWidget;
+import org.afonu.utility.client.screen.OffHandHUDWidget;
 
 public class OptionInit {
     public static Option Option;
@@ -20,5 +21,6 @@ public class OptionInit {
         //ArmorHUD
         HudRenderCallback.EVENT.register(new ArmorHUDWidget());
         HudRenderCallback.EVENT.register(new ItemHUDWidget());
+        HudRenderCallback.EVENT.register(new OffHandHUDWidget());
     }
 }

@@ -6,14 +6,8 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.RenderTickCounter;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
 import org.afonu.utility.client.option.OptionInit;
-
-import java.awt.*;
-
-//TODO Add OffHand Damage Indicator
 
 public class ItemHUDWidget implements HudRenderCallback {
     @Override

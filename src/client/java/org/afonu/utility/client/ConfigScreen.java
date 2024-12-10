@@ -35,12 +35,15 @@ public class ConfigScreen extends Screen {
     public ButtonWidget buttonAttackEntity;
     public ButtonWidget buttonItemHUD;
     public ButtonWidget buttonArmorHUD;
+    public ButtonWidget buttonOffHandHUD;
     public ButtonWidget button2;
     public ButtonWidget buttonPauseGameOnMenu;
     public ButtonWidget buttonItemHUDItem;
     public ButtonWidget buttonItemHUDDamage;
     public ButtonWidget buttonArmorHUDItem;
     public ButtonWidget buttonArmorHUDDamage;
+    public ButtonWidget buttonOffHandItem;
+    public ButtonWidget buttonOffHandDamage;
 
     //List
     public MenuListWidget elementListWidget;
@@ -51,7 +54,8 @@ public class ConfigScreen extends Screen {
     public SliderWidget sliderItemHUDPositionY;
     public SliderWidget sliderArmorHUDPositionX;
     public SliderWidget sliderArmorHUDPositionY;
-
+    public SliderWidget sliderOffHandHUDPositionX;
+    public SliderWidget sliderOffHandHUDPositionY;
 
     //Checker
     public CheckboxWidget checkerAllowAttackEntity;
@@ -83,8 +87,11 @@ public class ConfigScreen extends Screen {
         addDrawableChild(sliderItemHUDPositionY);
         addDrawableChild(sliderArmorHUDPositionX);
         addDrawableChild(sliderArmorHUDPositionY);
+        addDrawableChild(sliderOffHandHUDPositionX);
+        addDrawableChild(sliderOffHandHUDPositionY);
         addDrawableChild(buttonItemHUD);
         addDrawableChild(buttonArmorHUD);
+        addDrawableChild(buttonOffHandHUD);
         addDrawableChild(buttonPauseGameOnMenu);
         addDrawableChild(saveButton);
 //        addDrawableChild(checkerAllowAttackBlock);
@@ -96,6 +103,8 @@ public class ConfigScreen extends Screen {
         addDrawableChild(buttonItemHUDDamage);
         addDrawableChild(buttonArmorHUDItem);
         addDrawableChild(buttonArmorHUDDamage);
+        addDrawableChild(buttonOffHandItem);
+        addDrawableChild(buttonOffHandDamage);
 
         addDrawableChild(elementListWidget);
     }
@@ -136,6 +145,31 @@ public class ConfigScreen extends Screen {
                 .dimensions(width / 2 - 105, (120 + (2*SPACE_BETWEEN_Y)), 100, 20)
                 .tooltip(Tooltip.of(Text.literal(GREEN + "True" + WHITE + ": Show item remaining durability.\n" + RED + "False" + WHITE + ": Hide item remaining durability.")))
                 .build();
+
+        buttonOffHandHUD = ButtonWidget.builder(Text.literal("Off Hand HUD: " + (option.toggleOffHandHUD ? GREEN + "True" : RED + "False")), button -> {
+                    option.toggleOffHandHUD = !option.toggleOffHandHUD;
+                    UpdateText(buttonOffHandHUD, "Item HUD: ", String.valueOf(option.toggleOffHandHUD));
+                })
+                .dimensions(width / 2 - 210, (140 + (3*SPACE_BETWEEN_Y)), 205, 20)
+                .tooltip(Tooltip.of(Text.literal(GREEN + "True" + WHITE + ": Show your off hand's item.\n" + RED + "False" + WHITE + ": Hide your off hand's item.")))
+                .build();
+
+        buttonOffHandItem = ButtonWidget.builder(Text.literal("Show Off Hand: " + (option.toggleOnlyOffHand ? GREEN + "True" : RED + "False")), button -> {
+                    option.toggleOnlyOffHand = !option.toggleOnlyOffHand;
+                    UpdateText(buttonOffHandItem, "Show Off Hand: ", String.valueOf(option.toggleOnlyOffHand));
+                })
+                .dimensions(width / 2 - 105, (160 + (4*SPACE_BETWEEN_Y)), 100, 20)
+                .tooltip(Tooltip.of(Text.literal(GREEN + "True" + WHITE + ": Show off hand's icon.\n" + RED + "False" + WHITE + ": Hide off hand's icon.")))
+                .build();
+
+        buttonOffHandDamage = ButtonWidget.builder(Text.literal("Show Item Durability: " + (option.toggleOnlyDamageOffHand ? GREEN + "True" : RED + "False")), button -> {
+                    option.toggleOnlyDamageOffHand = !option.toggleOnlyDamageOffHand;
+                    UpdateText(buttonOffHandDamage, "Show Item Durability: ", String.valueOf(option.toggleOnlyDamageOffHand));
+                })
+                .dimensions(width / 2 - 105, (180 + (5*SPACE_BETWEEN_Y)), 100, 20)
+                .tooltip(Tooltip.of(Text.literal(GREEN + "True" + WHITE + ": Show off hand remaining durability.\n" + RED + "False" + WHITE + ": Hide off hand remaining durability.")))
+                .build();
+
     }
 
     private void SetRightRow() {
@@ -235,6 +269,37 @@ public class ConfigScreen extends Screen {
             }
         };
         sliderItemHUDPositionY.setTooltip(Tooltip.of(Text.literal("Y Position of Item")));
+
+        // OffHand Positions Sliders
+        double dOffHandX = (double) option.offHandHUD_positionX /10;
+        double dOffHandY = (double) option.offHandHUD_positionY /10;
+        sliderOffHandHUDPositionX = new SliderWidget(width / 2 - 210, (160 + (4*SPACE_BETWEEN_Y)), 100, 20, Text.literal("OffHand X: " + dOffHandX + "%"), (double) option.offHandHUD_positionX /1000) {
+            @Override
+            protected void updateMessage() {
+                double d = (double) option.offHandHUD_positionX /10;
+                this.setMessage(Text.literal("OffHand X: " + d + "%"));
+            }
+
+            @Override
+            protected void applyValue() {
+                option.offHandHUD_positionX = (int) (this.value * 1000);
+            }
+        };
+        sliderOffHandHUDPositionX.setTooltip(Tooltip.of(Text.literal("X Position of OffHand")));
+
+        sliderOffHandHUDPositionY = new SliderWidget(width / 2 - 210, (180 + (5*SPACE_BETWEEN_Y)), 100, 20, Text.literal("OffHand Y: " + dOffHandY + "%"), (double) option.offHandHUD_positionY /1000) {
+            @Override
+            protected void updateMessage() {
+                double d = (double) option.offHandHUD_positionY /10;
+                this.setMessage(Text.literal("OffHand Y: " + d + "%"));
+            }
+
+            @Override
+            protected void applyValue() {
+                option.offHandHUD_positionY = (int) (this.value * 1000);
+            }
+        };
+        sliderOffHandHUDPositionY.setTooltip(Tooltip.of(Text.literal("Y Position of OffHand")));
 
         // Armor Positions Sliders
         double dArmorX = (double) option.armorHUD_positionX /10;
