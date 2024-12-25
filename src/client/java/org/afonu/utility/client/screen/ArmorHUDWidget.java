@@ -7,9 +7,6 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.item.ItemStack;
-import org.afonu.utility.client.option.OptionInit;
-
-import java.awt.*;
 
 import static org.afonu.utility.client.option.OptionInit.Option;
 
